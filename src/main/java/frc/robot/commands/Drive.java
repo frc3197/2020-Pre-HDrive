@@ -19,10 +19,12 @@ import frc.robot.subsystems.DriveTrain;
 public class Drive extends Command {
   private DriveTrain driveTrain;
 
-
+ 
   public Drive(DriveTrain driveTrain) {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_subsystem);
+    requires(Robot.driveTrain);
+
+
   }
 
   // Called just before this Command runs the first time
@@ -33,12 +35,11 @@ public class Drive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-      double HDriveY = OI.hDriveY();
+      double HDriveL = OI.hDriveL();
       double HDriveR = OI.hDriveR();
-      driveTrain.hDrive(HDriveR, HDriveY);
-      double HDriveStrafeLeft = OI.hDriveStrafeLeft();
-      double HDriveStrafeRight = OI.hDriveStrafeRight();
-      driveTrain.hDriveStrafe(HDriveStrafeLeft,HDriveStrafeRight);
+      driveTrain.hDrive(HDriveR, HDriveL);
+      driveTrain.hDriveStrafe();
+      
     }
 
   

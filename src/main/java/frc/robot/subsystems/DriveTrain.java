@@ -12,11 +12,13 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import frc.robot.OI;
 import frc.robot.RobotMap.CANSparkMaxID;
 import frc.robot.commands.Drive;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 /**
  * An example subsystem. You can replace me with your own Subsystem.
  */
@@ -30,9 +32,8 @@ public class DriveTrain extends Subsystem {
   private CANSparkMax m1SparkMax = new CANSparkMax(CANSparkMaxID.kMiddle.id,MotorType.kBrushless);
   private SpeedControllerGroup leftMotors = new SpeedControllerGroup(l1SparkMax, l2SparkMax);
   private SpeedControllerGroup rightMotors = new SpeedControllerGroup(r1SparkMax, r2SparkMax);
- 
   private DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
-
+ 
   public DriveTrain() {
     l1SparkMax.setIdleMode(IdleMode.kBrake);
     l2SparkMax.setIdleMode(IdleMode.kBrake);
@@ -48,8 +49,13 @@ public class DriveTrain extends Subsystem {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-public void hDriveStrafe()
-  public void hDrive(double y, double r) {
-    drive.tankDrive(y, r, true);
+  public void hDrive(double l, double r) {
+    drive.tankDrive(l, r, true);
   }
+ ///
+  public void hDriveStrafe(){
+   double hStrafeVal = (OI.hDriveStrafeLeft() *-1 + OI.hDriveStrafeRight());
+   m1SparkMax.set(hStrafeVal);
+  }
+
 }

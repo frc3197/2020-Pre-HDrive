@@ -2,13 +2,8 @@
 
 package frc.robot;
 
-import frc.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.POVButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -17,10 +12,12 @@ import edu.wpi.first.wpilibj.buttons.POVButton;
 public class OI {
   private static XboxController driver = new XboxController(0);
 
-
   
-
-  public static double hDriveY() {
+  public static double hDriveR() {
+    return driver.getY(Hand.kRight);
+  }
+  //////
+  public static double hDriveL() {
     return driver.getY(Hand.kLeft);
   }
 ///
@@ -34,9 +31,7 @@ public class OI {
   return driver.getTriggerAxis(Hand.kRight);
  }
  ///
-  public static double hDriveR() {
-    return driver.getX(Hand.kLeft);
-  }
+
 }
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
