@@ -23,18 +23,23 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
  * An example subsystem. You can replace me with your own Subsystem.
  */
 public class DriveTrain extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  // Creates CANSparkMax objects using the CANSparkMaxID's we enumerated earlier
   private CANSparkMax l1SparkMax = new CANSparkMax(CANSparkMaxID.kLeft1.id, MotorType.kBrushless);
   private CANSparkMax l2SparkMax = new CANSparkMax(CANSparkMaxID.kLeft2.id, MotorType.kBrushless);
   private CANSparkMax r1SparkMax = new CANSparkMax(CANSparkMaxID.kRight1.id, MotorType.kBrushless);
   private CANSparkMax r2SparkMax = new CANSparkMax(CANSparkMaxID.kRight2.id, MotorType.kBrushless);
   private CANSparkMax m1SparkMax = new CANSparkMax(CANSparkMaxID.kMiddle.id,MotorType.kBrushless);
+
+  // Creates two motorController groups for the left motors and the right motors.
   private SpeedControllerGroup leftMotors = new SpeedControllerGroup(l1SparkMax, l2SparkMax);
   private SpeedControllerGroup rightMotors = new SpeedControllerGroup(r1SparkMax, r2SparkMax);
+
+  // Creates a DifferentialDrive for the tankDrive function
   private DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
- 
+
   public DriveTrain() {
+
+    // Sets the motors to brake mode so that they don't coast when they're not getting any inputs.
     l1SparkMax.setIdleMode(IdleMode.kBrake);
     l2SparkMax.setIdleMode(IdleMode.kBrake);
     r1SparkMax.setIdleMode(IdleMode.kBrake);
@@ -45,16 +50,20 @@ public class DriveTrain extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
+    // This makes it so the DriveTrain class runs the Drive command on Default.
     setDefaultCommand(new Drive(this));
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+
+
   }
+  // Constructor for the hDrive drivetrain object.
   public void hDrive(double l, double r) {
     drive.tankDrive(l, r, true);
   }
- ///
-  public void hDriveStrafe(){
-   double hStrafeVal = (OI.hDriveStrafeLeft() *-1 + OI.hDriveStrafeRight());
+ // Constructor for the strafe functionality.
+ // hStrafeVal is the value for a single motor so we make the right trigger a negative value.
+ // This can make it so that the right trigger will give a negative value and the left will stay positive. 
+  public void hDriveStrafe(double l, double r){
+   double hStrafeVal = (r *-1 + l);
    m1SparkMax.set(hStrafeVal);
   }
 

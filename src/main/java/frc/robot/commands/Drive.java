@@ -19,7 +19,7 @@ import frc.robot.subsystems.DriveTrain;
 public class Drive extends Command {
   private DriveTrain driveTrain;
 
- 
+
   public Drive(DriveTrain driveTrain) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.driveTrain);
@@ -35,14 +35,19 @@ public class Drive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+ // Pulls the value of the stick from the methods created in OI and puts them into our HDrive function.
       double HDriveL = OI.hDriveL();
       double HDriveR = OI.hDriveR();
       driveTrain.hDrive(HDriveR, HDriveL);
-      driveTrain.hDriveStrafe();
-      
+
+ // Pulls the values of the triggers from the methods created in OI and is put into our strafe function.
+      double HDriveLstrafe = OI.hDriveStrafeLeft();
+      double HDriveRstrafe = OI.hDriveStrafeRight();
+      driveTrain.hDriveStrafe(OI.hDriveStrafeRight,OI.hDriveStrafeRight);
+
     }
 
-  
+
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -53,7 +58,9 @@ public class Drive extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+  // Sets the values of the motors to 0 at the end of the code.
     driveTrain.hDrive(0, 0);
+    driveTrain.hDriveStrafe(0,0);
   }
 
   // Called when another command which requires one or more of the same
@@ -62,5 +69,5 @@ public class Drive extends Command {
   protected void interrupted() {
   }
 
-  
+
 }
