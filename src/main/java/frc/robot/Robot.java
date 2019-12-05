@@ -24,7 +24,7 @@ import frc.robot.subsystems.DriveTrain;
  */
 public class Robot extends TimedRobot {
   public static DriveTrain driveTrain = new DriveTrain();
-  public static OI m_oi;
+  public static OI m_oi = new OI;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    
+
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
   }
