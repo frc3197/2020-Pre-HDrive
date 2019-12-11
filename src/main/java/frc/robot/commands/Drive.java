@@ -17,7 +17,6 @@ import frc.robot.subsystems.DriveTrain;
  * An example command. You can replace me with your own command.
  */
 public class Drive extends Command {
-  private DriveTrain driveTrain;
 
   public Drive(DriveTrain driveTrain) {
     // Use requires() here to declare subsystem dependencies
@@ -37,13 +36,13 @@ public class Drive extends Command {
     // into our HDrive function.
     double HDriveL = OI.hDriveL();
     double HDriveR = OI.hDriveR();
-    driveTrain.hDrive(HDriveR, HDriveL);
+    Robot.driveTrain.hDrive(HDriveR, HDriveL);
 
     // Pulls the values of the triggers from the methods created in OI and is put
     // into our strafe function.
     double HDriveLstrafe = OI.hDriveStrafeLeft();
     double HDriveRstrafe = OI.hDriveStrafeRight();
-    driveTrain.hDriveStrafe(HDriveLstrafe, HDriveRstrafe);
+    Robot.driveTrain.hDriveStrafe(HDriveLstrafe, HDriveRstrafe);
 
   }
 
@@ -57,8 +56,8 @@ public class Drive extends Command {
   @Override
   protected void end() {
     // Sets the values of the motors to 0 at the end of the code.
-    driveTrain.hDrive(0, 0);
-    driveTrain.hDriveStrafe(0, 0);
+    Robot.driveTrain.hDrive(0, 0);
+    Robot.driveTrain.hDriveStrafe(0, 0);
   }
 
   // Called when another command which requires one or more of the same
