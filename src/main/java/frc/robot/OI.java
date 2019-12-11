@@ -1,5 +1,4 @@
 
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -11,29 +10,31 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class OI {
 
-  //  Creates an Xbox Controller called driver.
+  // Creates an Xbox Controller called driver.
   private static XboxController driver = new XboxController(0);
 
-  //  Returns the Y value of the right joystick and stores it in hDrvieR.
+  // Returns the Y value of the right joystick and stores it in hDrvieR.
   public static double hDriveR() {
     return driver.getY(Hand.kRight);
   }
 
-  //  Returns the Y value of the left joystick and stores it in hDriveL.
+  // Returns the Y value of the left joystick and stores it in hDriveL.
   public static double hDriveL() {
     return driver.getY(Hand.kLeft);
   }
 
-// Returns the axis value of the left trigger and stores it in hDriveStrafeLeft
- public static double hDriveStrafeLeft() {
+  // Returns the axis value of the left trigger and stores it in hDriveStrafeLeft
+  public static double hDriveStrafeLeft() {
 
-  return driver.getTriggerAxis(Hand.kLeft);
- }
-// Returns the axis value of the right trigger and stores it in hDriveStrafeRight
- public static double hDriveStrafeRight() {
+    return driver.getTriggerAxis(Hand.kLeft);
+  }
 
-  return driver.getTriggerAxis(Hand.kRight);
- }
- ///
+  // Returns the axis value of the right trigger and stores it in
+  // hDriveStrafeRight
+  public static double hDriveStrafeRight() {
 
-}}
+    return driver.getTriggerAxis(Hand.kRight);
+  }
+  ///
+
+}
